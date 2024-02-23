@@ -11,6 +11,11 @@ JOIN student_guardian on guardian.guardian_id = student_guardian.guardian_type_i
 JOIN student on student_guardian.guardian_type_id = student.student_id
 WHERE student.student_id = 2;
 
+--gets teacher by id
+SELECT * from teacher where teacher.teacher_id = 1;
+
+--update student grade
+
 --gets the students guardian information by student first name
 select guardian.first_name, guardian.last_name, guardian.email_address, guardian.phone_number from guardian
 JOIN student_guardian on guardian.guardian_id = student_guardian.guardian_type_id
@@ -52,10 +57,10 @@ join student on student.student_id = student_class.student_id
 where student.student_id = 1;
 
 --This pulls the student rosters for classes based on SUBJECT and PERIOD and (ADD TEACHER FIRST NAME FOR LOGIN SPECIFIC INFORMATION)
-select student.first_name, student.last_name, student.gender, teacher.first_name from student
+select student.first_name, student.last_name, student.gender, student_class.grade from student
 join student_class on student_class.student_id = student.student_id
 join school_class on school_class.class_id = student_class.class_id
 join teacher on teacher.teacher_id = school_class.teacher_id
 join school_period on school_period.school_period_id = school_class.school_period_id
 join subject on subject.subject_id = school_class.subject_id
-where subject.subject_name = 'Math' AND school_period.period_name = 'Second Period';
+where teacher.teacher_id = 1 AND school_period.school_period_id = 1;
