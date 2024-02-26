@@ -68,7 +68,6 @@ public class TeacherController {
         return teacher;
     }
 
-    @RequestMapping(path = "/updateGrade/")
 
     @RequestMapping(path = "/{teacherId}/roster/{periodId}", method = RequestMethod.GET)
     public TeacherRoster getTeacherRoster(@PathVariable int teacherId, @PathVariable int periodId){
