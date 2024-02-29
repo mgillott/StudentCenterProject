@@ -1,15 +1,14 @@
 <template>
     <div v-for="schedule in schedule">
-        <h2>{{ schedule.periodName }}</h2>
-        <p>{{ schedule.subjectName }}</p>
-        <p>{{ schedule.teacherFirstName }}</p>
-        <p>{{ schedule.teacherLastName }}</p>
+        <ScheduleCard v-bind:schedule="schedule"></ScheduleCard>
     </div>
 </template>
 
 <script>
+import ScheduleCard from './cards/schedule-card.vue';
 export default{
-    props:['schedule'],
+    props: ['schedule'],
+    components: { ScheduleCard }
 };
 </script>
 
