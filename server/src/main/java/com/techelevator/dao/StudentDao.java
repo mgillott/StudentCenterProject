@@ -12,4 +12,6 @@ public interface StudentDao {
     Student getStudentById(int id);
     List<Schedule> getStudentScheduleById(int id);
 
+    Student createStudent(Student student);
+
 }

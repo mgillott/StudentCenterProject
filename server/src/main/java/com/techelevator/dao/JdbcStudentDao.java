@@ -1,7 +1,10 @@
 package com.techelevator.dao;
 
+import com.techelevator.exception.DaoException;
 import com.techelevator.model.Schedule;
 import com.techelevator.model.Student;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
@@ -61,6 +64,23 @@ public class JdbcStudentDao implements StudentDao {
         return studentSchedule;
     }
 
+    @Override
+    public Student createStudent(Student student) {
+        Student newStudent;
+        String sql = "INSERT INTO student (first_name, middle_name, last_name, date_of_birth, gender, enrollment_date) VALUES (?, ?, ?, ?, ?, ?) RETURNING student_id;";
+
+        try{
+            int newStudentId = jdbcTemplate.queryForObject(sql, int.class, student.getFirstName(), student.getMiddleName(), student.getLastName(), student.getDateOfBirth(), student.getGender(), student.getEnrollmentDate());
+            newStudent = getStudentById(newStudentId);
+        } catch (CannotGetJdbcConnectionException e) {
+            throw new DaoException("Unable to connect to server or database", e);
+        } catch (DataIntegrityViolationException i) {
+            throw new DaoException("Data integrity violation", i);
+        }
+
+        return newStudent;
+    }
+
     public Schedule mapToSchedule(SqlRowSet sqlRowSet){
         Schedule schedule = new Schedule();
         schedule.setPeriodName(sqlRowSet.getString("period_name"));
@@ -77,9 +97,9 @@ public class JdbcStudentDao implements StudentDao {
         student.setFirstName(sqlRowSet.getString("first_name"));
         student.setMiddleName(sqlRowSet.getString("last_name"));
         student.setLastName(sqlRowSet.getString("last_name"));
-        student.setDateOfBirth(sqlRowSet.getString("date_of_birth"));
+        student.setDateOfBirth(sqlRowSet.getDate("date_of_birth").toLocalDate());
         student.setGender(sqlRowSet.getString("gender"));
-        student.setEnrollmentDate(sqlRowSet.getString("enrollment_date"));
+        student.setEnrollmentDate(sqlRowSet.getDate("enrollment_date").toLocalDate());
         return student;
     }
 }

@@ -1,5 +1,8 @@
 package com.techelevator.model;
 
+import org.apache.tomcat.jni.Local;
+
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -9,16 +12,16 @@ public class Student {
     private String firstName;
     private String middleName;
     private String lastName;
-    private String dateOfBirth;
+    private LocalDate dateOfBirth;
     private String gender;
-    private String enrollmentDate;
+    private LocalDate enrollmentDate;
 
     private Map<String, String> studentSchedule;
 
     public Student(){
     }
 
-    public Student(int id, String firstName, String middleName, String lastName, String dateOfBirth, String gender, String enrollmentDate) {
+    public Student(int id, String firstName, String middleName, String lastName, LocalDate dateOfBirth, String gender, LocalDate enrollmentDate) {
         this.id = id;
         this.firstName = firstName;
         this.middleName = middleName;
@@ -28,7 +31,7 @@ public class Student {
         this.enrollmentDate = enrollmentDate;
     }
 
-    public Student(int id, String firstName, String middleName, String lastName, String dateOfBirth, String gender, String enrollmentDate, Map<String, String> studentSchedule) {
+    public Student(int id, String firstName, String middleName, String lastName, LocalDate dateOfBirth, String gender, LocalDate enrollmentDate, Map<String, String> studentSchedule) {
         this.id = id;
         this.firstName = firstName;
         this.middleName = middleName;
@@ -71,11 +74,11 @@ public class Student {
         this.lastName = lastName;
     }
 
-    public String getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(String dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -87,11 +90,11 @@ public class Student {
         this.gender = gender;
     }
 
-    public String getEnrollmentDate() {
+    public LocalDate getEnrollmentDate() {
         return enrollmentDate;
     }
 
-    public void setEnrollmentDate(String enrollmentDate) {
+    public void setEnrollmentDate(LocalDate enrollmentDate) {
         this.enrollmentDate = enrollmentDate;
     }
 

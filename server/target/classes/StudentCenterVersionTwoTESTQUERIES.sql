@@ -64,3 +64,9 @@ join teacher on teacher.teacher_id = school_class.teacher_id
 join school_period on school_period.school_period_id = school_class.school_period_id
 join subject on subject.subject_id = school_class.subject_id
 where teacher.teacher_id = 1 AND school_period.school_period_id = 1;
+
+
+--ADD QUERIES
+INSERT INTO student (first_name, middle_name, last_name, date_of_birth, gender, enrollment_date)
+VALUES ('InsertKid1', 'MiddleNameInsertKid1', 'LastNameInsertKid', '2001-12-02', 'Male', '2024-02-19')
+RETURNING student_id;

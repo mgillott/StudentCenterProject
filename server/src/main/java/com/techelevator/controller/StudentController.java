@@ -51,6 +51,11 @@ public class StudentController {
         return students;
     }
 
+    @RequestMapping(method = RequestMethod.POST)
+    public Student createStudent(@RequestBody Student student){
+        return studentDao.createStudent(student);
+    }
+
     @RequestMapping(path = "/{id}", method = RequestMethod.GET)
     public Student getStudentById(@PathVariable int id){
         Student student = new Student();
